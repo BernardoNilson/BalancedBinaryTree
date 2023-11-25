@@ -1,4 +1,9 @@
-
+/**
+ * Classe principal do Trabalho Final de Algoritmos e Estruturas de Dados I
+ * @author Bernardo Nilson
+ * @author Juliana Fernandes
+ * @author Prof. Marcio Pinho
+ */
 public class App {
     public static void main(String[] args) {
         BinarySearchTreeOfInteger b = new BinarySearchTreeOfInteger();
@@ -10,6 +15,8 @@ public class App {
         b.add(20);
         b.add(38);
 
+        // 15, 23, 9, 11, 2, 20, 38...
+        
         System.out.println("Central:\n" + b.positionsCentral());
         
         System.out.println("Contem 2? " + b.contains(2));

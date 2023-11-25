@@ -21,11 +21,13 @@ public class BinarySearchTreeOfInteger {
     private int count; //contagem do número de nodos
     private Node root; //referência para o nodo raiz
 
+    // Construtur da     public BinarySearchTreeOfInteger() {
     public BinarySearchTreeOfInteger() {
         count = 0;
         root = null;
     }
 
+    // Consultas
     public void clear() {
         count = 0;
         root = null;
@@ -46,10 +48,12 @@ public class BinarySearchTreeOfInteger {
         return root.element;
     }
 
+    // Adição de elementos na lista
     public void add(Integer element) {
         root = add(root, element, null);
         count++;
     }
+    
     private Node add(Node n, Integer e, Node father) {
         if (n == null) {
             Node aux = new Node(e);
@@ -65,6 +69,30 @@ public class BinarySearchTreeOfInteger {
         return n;
     }
 
+    // Balaceamento
+    public void ApplyBalancing(Integer e) {
+        // Procura o nodo do elemento
+        // Confere a diferença de altura dos lados do nodo
+        // Condicionais para aplicar rotações específicas
+        // Exibe qual tipo de rotação estamos utilizando
+    }
+
+    public void ApplyBalancing(Node n) {
+        // Seria mais facil tratar tudo aqui
+    }
+
+    public void rotationLeftLeft(Node n) {
+        // Rotação EE
+    }
+
+    public void rotationRightRight(Node n) {
+        //  Rotação DD
+    }
+
+    public boolean isBalanced(Node n) {
+        return false;
+    }
+    // Caminhamentos
     public LinkedListOfInteger positionsPre() {
         LinkedListOfInteger res = new LinkedListOfInteger();
         positionsPreAux(root, res);
@@ -127,6 +155,7 @@ public class BinarySearchTreeOfInteger {
         return res;
     }
 
+    // Verificações
     public boolean contains(Integer element) {
         Node aux = searchNodeRef(element, root);
         return (aux != null);
@@ -148,6 +177,7 @@ public class BinarySearchTreeOfInteger {
         }
     }    
 
+    // Geração da visualização DOT
     private void GeraConexoesDOT(Node nodo) {
         if (nodo == null) {
             return;
