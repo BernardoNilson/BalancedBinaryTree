@@ -15,16 +15,16 @@ public class App {
         b.add(20);
         b.add(38);
 
-        b.add(13);
-        b.add(14);
+        // b.add(13);
+        b.add(48);
         b.add(68);
 
         System.out.println("-------------");
         b.GeraDOT();
         System.out.println("-------------"); 
-
-        b.ApplyBalancing(9);
-
+        System.out.println("Root element: " + b.getRoot());
+        b.ApplyBalancing(15);
+        System.out.println("Root element: " + b.getRoot());
         // System.out.println("Central:\n" + b.positionsCentral());
         
         // System.out.println("Contem 2? " + b.contains(2));

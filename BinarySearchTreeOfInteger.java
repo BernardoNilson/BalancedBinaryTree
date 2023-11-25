@@ -128,10 +128,36 @@ public class BinarySearchTreeOfInteger {
 
     private void rotationToRight(Node n) {
         // Rotação EE
+        /*
+         * 
+         */
     }
 
     private void rotationToLeft(Node n) {
         //  Rotação DD
+        if (n != null) {
+            Node child = n.right;
+            Node father = n.father;
+
+            // System.out.println("Father: " + father.element);
+            System.out.println("Child: " + child.element);
+
+            child.father = father;
+            if (father != null) father.right = child;
+            
+            n.right = child.left;
+            if (child.left != null) child.left.father = n;
+
+            if (n == root) root = child;
+            
+            n.father = child;
+            child.left = n;
+        }
+    }
+
+    public void rotation(Integer i) {
+        Node n = searchNodeRef(i, root);
+        rotationToLeft(n);
     }
 
     /**
