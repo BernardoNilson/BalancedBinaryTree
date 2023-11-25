@@ -48,6 +48,19 @@ public class BinarySearchTreeOfInteger {
         return root.element;
     }
 
+    public int getHeight() {
+        return getHeight(root);
+    }
+    
+    private int getHeight(Node node) {
+        if (node == null) return 0;
+    
+        int leftHeight = getHeight(node.left);
+        int rightHeight = getHeight(node.right);
+    
+        return (leftHeight > rightHeight) ? leftHeight + 1 : rightHeight + 1;
+    }
+    
     // Adição de elementos na lista
     public void add(Integer element) {
         root = add(root, element, null);
@@ -72,26 +85,88 @@ public class BinarySearchTreeOfInteger {
     // Balaceamento
     public void ApplyBalancing(Integer e) {
         // Procura o nodo do elemento
-        // Confere a diferença de altura dos lados do nodo
+        Node n = searchNodeRef(e, root);
+        System.out.println("Elemento do nodo com o elemento: " + n.element);
+        if (n != null) {
+            ApplyBalancing(n);
+        }
+    } 
+
+    private boolean ApplyBalancing(Node n) {
+        if (isBalanced(n)) return true;
+       
         // Condicionais para aplicar rotações específicas
-        // Exibe qual tipo de rotação estamos utilizando
+
+        int rotation = whichRotation(n);
+
+        switch (rotation) {
+            case 1:
+                System.out.println("Estamos usando a rotação Esquerda-Esquerda!");
+                rotationToRight(n);
+                break;
+            case 2:
+                System.out.println("Estamos usando a rotação Esquerda-Direita!");
+                rotationToLeft(n.left);
+                rotationToRight(n);
+                break;
+            case 3:
+                System.out.println("Estamos usando a rotação Direita-Esquerda!");
+                rotationToRight(n.right);
+                rotationToLeft(n);
+                break;
+            case 4:
+                System.out.println("Estamos usando a rotação Direita-Direita!");
+                rotationToLeft(n);
+                break;
+        
+            default:
+                break;
+        }
+
+        return true;
     }
 
-    public void ApplyBalancing(Node n) {
-        // Seria mais facil tratar tudo aqui
-    }
-
-    public void rotationLeftLeft(Node n) {
+    private void rotationToRight(Node n) {
         // Rotação EE
     }
 
-    public void rotationRightRight(Node n) {
+    private void rotationToLeft(Node n) {
         //  Rotação DD
     }
 
-    public boolean isBalanced(Node n) {
-        return false;
+    /**
+     * Retornos:
+     * 0 se Node está nulo,
+     * 1 se for rotação EE,
+     * 2 se for rotação ED,
+     * 3 se for rotação DE,
+     * 4 se for rotação DD
+     */
+    private int whichRotation(Node n) {
+        if (n == null) return 0;
+
+        Node leftChild = n.left;
+        Node rightChild = n.right;
+
+        if (isHighestOrEqualThan(leftChild, rightChild)) {
+            if (isHighestOrEqualThan(leftChild.left, leftChild.right)) return 1;
+            else return 2;
+        } else {
+            if (isHighestOrEqualThan(rightChild.left, rightChild.right)) return 3;
+            else return 4;
+        }
     }
+
+    private boolean isHighestOrEqualThan(Node node, Node compared) {
+        return getHeight(node) >= getHeight(compared);
+    }
+
+    private boolean isBalanced(Node n) {
+        if (n == null) return false;
+
+        return Math.abs(getHeight(n.left) - getHeight(n.right)) <= 1;
+    }
+    
     // Caminhamentos
     public LinkedListOfInteger positionsPre() {
         LinkedListOfInteger res = new LinkedListOfInteger();

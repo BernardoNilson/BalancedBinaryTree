@@ -15,14 +15,22 @@ public class App {
         b.add(20);
         b.add(38);
 
-        // 15, 23, 9, 11, 2, 20, 38...
+        b.add(13);
+        b.add(14);
+        b.add(68);
+
+        System.out.println("-------------");
+        b.GeraDOT();
+        System.out.println("-------------"); 
+
+        b.ApplyBalancing(9);
+
+        // System.out.println("Central:\n" + b.positionsCentral());
         
-        System.out.println("Central:\n" + b.positionsCentral());
-        
-        System.out.println("Contem 2? " + b.contains(2));
-        System.out.println("Contem 38? " + b.contains(38));
-        System.out.println("Contem 55? " + b.contains(55));
-        System.out.println("Contem 32? " + b.contains(32));
+        // System.out.println("Contem 2? " + b.contains(2));
+        // System.out.println("Contem 38? " + b.contains(38));
+        // System.out.println("Contem 55? " + b.contains(55));
+        // System.out.println("Contem 32? " + b.contains(32));
 
         System.out.println("-------------");
         b.GeraDOT();
