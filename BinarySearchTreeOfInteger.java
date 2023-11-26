@@ -92,45 +92,63 @@ public class BinarySearchTreeOfInteger {
         }
     } 
 
-    private boolean ApplyBalancing(Node n) {
-        if (isBalanced(n)) return true;
-       
+    private void ApplyBalancing(Node n) {
         // Condicionais para aplicar rotações específicas
+        if (!isBalanced(n)) {
+            int rotation = whichRotation(n);
 
-        int rotation = whichRotation(n);
-
-        switch (rotation) {
-            case 1:
-                System.out.println("Estamos usando a rotação Esquerda-Esquerda!");
-                rotationToRight(n);
-                break;
-            case 2:
-                System.out.println("Estamos usando a rotação Esquerda-Direita!");
-                rotationToLeft(n.left);
-                rotationToRight(n);
-                break;
-            case 3:
-                System.out.println("Estamos usando a rotação Direita-Esquerda!");
-                rotationToRight(n.right);
-                rotationToLeft(n);
-                break;
-            case 4:
-                System.out.println("Estamos usando a rotação Direita-Direita!");
-                rotationToLeft(n);
-                break;
-        
-            default:
-                break;
+            switch (rotation) {
+                case 1:
+                    System.out.println("Estamos usando a rotação Esquerda-Esquerda!");
+                    rotationToRight(n);
+                    break;
+                case 2:
+                    System.out.println("Estamos usando a rotação Esquerda-Direita!");
+                    rotationToLeft(n.left);
+                    rotationToRight(n);
+                    break;
+                case 3:
+                    System.out.println("Estamos usando a rotação Direita-Esquerda!");
+                    rotationToRight(n.right);
+                    rotationToLeft(n);
+                    break;
+                case 4:
+                    System.out.println("Estamos usando a rotação Direita-Direita!");
+                    rotationToLeft(n);
+                    break;
+            
+                default:
+                    break;
+            }
         }
 
-        return true;
+        if (!isBalanced(n)) ApplyBalancing(n);
     }
 
     private void rotationToRight(Node n) {
-        // Rotação EE
-        /*
-         * 
-         */
+        //  Rotação EE
+        if (n != null) {
+            Node child = n.left;
+            Node father = n.father;
+
+            // System.out.println("Father de n: " + father.element);
+            // System.out.println("N: " + n.element);
+            // System.out.println("Filho de n: " + child.element);
+            
+            child.father = father;
+            if (father != null) {
+                if (father.right == n) father.right = child;
+                else if (father.left == n) father.left = child;
+            }
+            
+            n.left = child.right;
+            if (child.right != null) child.right.father = n;
+
+            if (n == root) root = child;
+            
+            n.father = child;
+            child.right = n;
+        }
     }
 
     private void rotationToLeft(Node n) {
@@ -139,11 +157,17 @@ public class BinarySearchTreeOfInteger {
             Node child = n.right;
             Node father = n.father;
 
-            // System.out.println("Father: " + father.element);
-            System.out.println("Child: " + child.element);
+            // System.out.println("Father de n: " + father.element);
+            // System.out.println("N: " + n.element);
+            // System.out.println("Filho de n: " + child.element);
 
             child.father = father;
             if (father != null) father.right = child;
+
+            if (father != null) {
+                if (father.right == n) father.right = child;
+                else if (father.left == n) father.left = child;
+            }
             
             n.right = child.left;
             if (child.left != null) child.left.father = n;
@@ -153,11 +177,6 @@ public class BinarySearchTreeOfInteger {
             n.father = child;
             child.left = n;
         }
-    }
-
-    public void rotation(Integer i) {
-        Node n = searchNodeRef(i, root);
-        rotationToLeft(n);
     }
 
     /**
@@ -178,8 +197,8 @@ public class BinarySearchTreeOfInteger {
             if (isHighestOrEqualThan(leftChild.left, leftChild.right)) return 1;
             else return 2;
         } else {
-            if (isHighestOrEqualThan(rightChild.left, rightChild.right)) return 3;
-            else return 4;
+            if (isHighestOrEqualThan(rightChild.right, rightChild.left)) return 4;
+            else return 3;
         }
     }
 
