@@ -28,10 +28,11 @@ public class App {
         b.GeraDOT();
         System.out.println("-------------"); 
 
-        // b.ApplyBalancing(2);
-        // b.ApplyBalancing(100);
+        b.ApplyBalancing(2);
+        b.ApplyBalancing(100);
         // b.ApplyBalancing(58);
         // b.ApplyBalancing(48);
+        b.ApplyBalancing(15);
         b.ApplyBalancing(15);
         
 

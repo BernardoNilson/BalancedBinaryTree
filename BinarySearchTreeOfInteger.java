@@ -121,8 +121,6 @@ public class BinarySearchTreeOfInteger {
                     break;
             }
         }
-
-        if (!isBalanced(n)) ApplyBalancing(n);
     }
 
     private void rotationToRight(Node n) {
