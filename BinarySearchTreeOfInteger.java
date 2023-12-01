@@ -86,7 +86,7 @@ public class BinarySearchTreeOfInteger {
     public void ApplyBalancing(Integer e) {
         // Procura o nodo do elemento
         Node n = searchNodeRef(e, root);
-        System.out.println("Elemento do nodo com o elemento: " + n.element);
+        System.out.println("Balanceamento do nodo com o elemento: " + n.element);
         if (n != null) {
             ApplyBalancing(n);
         }
@@ -160,7 +160,6 @@ public class BinarySearchTreeOfInteger {
             // System.out.println("Filho de n: " + child.element);
 
             child.father = father;
-            if (father != null) father.right = child;
 
             if (father != null) {
                 if (father.right == n) father.right = child;
