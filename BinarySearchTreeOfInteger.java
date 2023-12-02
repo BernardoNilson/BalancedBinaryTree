@@ -21,7 +21,7 @@ public class BinarySearchTreeOfInteger {
     private int count; //contagem do número de nodos
     private Node root; //referência para o nodo raiz
 
-    // Construtur da     public BinarySearchTreeOfInteger() {
+    // Construtur da public BinarySearchTreeOfInteger() {
     public BinarySearchTreeOfInteger() {
         count = 0;
         root = null;
@@ -128,22 +128,24 @@ public class BinarySearchTreeOfInteger {
         if (n != null) {
             Node child = n.left;
             Node father = n.father;
-
-            // System.out.println("Father de n: " + father.element);
-            // System.out.println("N: " + n.element);
-            // System.out.println("Filho de n: " + child.element);
             
+            // Atribui o pai do filho da esquerda como o pai do nodo e se esse pai existe
+            // define que esse filho da esquerda é filho desse pai
             child.father = father;
             if (father != null) {
                 if (father.right == n) father.right = child;
                 else if (father.left == n) father.left = child;
             }
             
+            // Caso o filho tenha alguém na direita, passamos 
+            // esses nodos para a esquerda livre do nodo
             n.left = child.right;
             if (child.right != null) child.right.father = n;
 
+            // Se o nodo é o root, atualizamos o root
             if (n == root) root = child;
             
+            // Invertemos a relação de pai para filho 
             n.father = child;
             child.right = n;
         }
